@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+    <style>
+        /* Style for the download message */
+        #downloadMessage {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 15px; /* Padding around the text */
+            text-align: center; /* Center the text */
+            font-size: 18px; /* Larger font size */
+            font-family: Arial, sans-serif; /* Font family */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 20px; /* Space below the message */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            display: none; /* Initially hidden */
+        }
+
+        /* Optional: Add a hover effect */
+        #downloadMessage:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <p id="downloadMessage" class="download-message">
+        Resume downloaded successfully!
+    </p>
+    <iframe src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-resume-marwen.pdf" width="100%" height="600px"></iframe>
+
+    <script>
+        // Example JavaScript to show the message after a download
+        setTimeout(function() {
+            document.getElementById('downloadMessage').style.display = 'block';
+        }, 3000); // Show message after 3 seconds (simulating a download)
+    </script>
+</body>
+</html>
