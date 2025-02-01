@@ -7,7 +7,7 @@
     <style>
         /* Style for the download message */
         #downloadMessage {
-            background-color: #4CAF50; /* Green background */
+            background-color: #2196F3; /* Blue background for loading */
             color: white; /* White text */
             padding: 15px; /* Padding around the text */
             text-align: center; /* Center the text */
@@ -17,13 +17,32 @@
             margin-bottom: 20px; /* Space below the message */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
             display: none; /* Initially hidden */
+            position: relative; /* For positioning the loader */
         }
 
-        /* Optional: Add a hover effect */
-        #downloadMessage:hover {
-            background-color: #45a049; /* Darker green on hover */
+        /* Loader animation */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px; /* Space between loader and text */
         }
-             /* Style to initially hide the iframe */
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Style for the "Done" state */
+        #downloadMessage.done {
+            background-color: #4CAF50; /* Green background for completion */
+        }
+
+        /* Style to initially hide the iframe */
         #pdfIframe {
             display: none; /* Initially hidden */
         }
@@ -31,15 +50,28 @@
 </head>
 <body>
     <p id="downloadMessage" class="download-message">
-        Resume downloaded successfully!
+        <span class="loader"></span> Downloading resume...
     </p>
     <iframe id="pdfIframe" src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-resume-marwen.pdf" width="100%" height="600px"></iframe>
 
     <script>
-        // Example JavaScript to show the message after a download
+        // Show the download message immediately
+        const downloadMessage = document.getElementById('downloadMessage');
+        downloadMessage.style.display = 'block';
+
+        // Simulate the download process
         setTimeout(function() {
-            document.getElementById('downloadMessage').style.display = 'block';
-        }, 3000); // Show message after 3 seconds (simulating a download)
+            // Change the message and color to "Done" and green
+            downloadMessage.innerHTML = 'Done!'; // Update the message
+            downloadMessage.classList.add('done'); // Change the background color to green
+
+            // Hide the loader
+            const loader = document.querySelector('.loader');
+            loader.style.display = 'none';
+
+            // Show the iframe after the download is complete
+            document.getElementById('pdfIframe').style.display = 'block';
+        }, 3000); // Simulate a 3-second download process
     </script>
 </body>
 </html>
