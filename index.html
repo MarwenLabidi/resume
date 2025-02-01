@@ -23,12 +23,23 @@
         #downloadMessage:hover {
             background-color: #45a049; /* Darker green on hover */
         }
+             /* Style to initially hide the iframe */
+        #pdfIframe {
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
     <p id="downloadMessage" class="download-message">
         Resume downloaded successfully!
     </p>
-    <iframe src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-resume-marwen.pdf"></iframe>
+    <iframe id="pdfIframe" src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-resume-marwen.pdf" width="100%" height="600px"></iframe>
+
+    <script>
+        // Example JavaScript to show the message after a download
+        setTimeout(function() {
+            document.getElementById('downloadMessage').style.display = 'block';
+        }, 3000); // Show message after 3 seconds (simulating a download)
+    </script>
 </body>
 </html>
