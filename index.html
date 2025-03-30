@@ -4,100 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marwen Labidi - Resume</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General body styling */
+        :root {
+            --bg-gradient-1: #0f2027;
+            --bg-gradient-2: #203a43;
+            --bg-gradient-3: #2c5364;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --accent-color: #64ffda;
+            --accent-hover: #00e5ff;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(255, 255, 255, 0.12);
+            --sponsor-bg: rgba(100, 255, 218, 0.1);
+            --sponsor-hover: rgba(100, 255, 218, 0.2);
+            --separator: rgba(100, 255, 218, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 50%, var(--bg-gradient-3) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            font-family: 'Poppins', sans-serif;
-            color: #333;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Container for the content */
+        /* Background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 50%, var(--bg-gradient-3) 100%);
+            z-index: -1;
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+        }
+
         .container {
-            width: 60%;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
+            width: 80%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+            border: 1px solid var(--separator);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
         }
 
-        /* Typing animation container */
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+        }
+
         #typingAnimation {
             font-size: 18px;
-            line-height: 1.6;
+            line-height: 1.8;
             white-space: pre-wrap;
             overflow: hidden;
-            border-right: 2px solid #333;
-            animation: blink-caret 0.75s step-end infinite;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 20px;
             text-align: left;
-            margin-bottom: 20px;
         }
 
-        /* Blinking cursor animation */
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #333; }
+        #typingAnimation::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
         }
 
-        /* Links container */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 20px;
+            background-color: var(--accent-color);
+            margin-left: 5px;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .header h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
         .links {
             display: flex;
             justify-content: center;
             gap: 25px;
-            margin-top: 20px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
 
-        /* Individual link styling */
         .link {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
-            font-size: 24px;
-            font-weight: 600;
-            background: linear-gradient(90deg, #2196F3, #4CAF50);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: transform 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            background-color: var(--card-bg);
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--separator);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .link i, .link span {
+            color: var(--accent-color);
+            transition: all 0.3s ease;
         }
 
         .link:hover {
-            transform: scale(1.1);
+            transform: translateY(-5px) scale(1.05);
+            background-color: var(--card-hover);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Download message styling */
-        #downloadMessage {
-            background-color: #2196F3;
-            color: white;
-            padding: 15px;
+        .link:hover i, .link:hover span {
+            color: var(--accent-hover);
+        }
+
+        .link:active {
+            transform: scale(0.95);
+        }
+
+        .download-section {
+            margin-top: 40px;
             text-align: center;
-            font-size: 18px;
-            border-radius: 5px;
+        }
+
+        #downloadMessage {
+            background-color: var(--sponsor-bg);
+            color: var(--accent-color);
+            padding: 15px;
+            border-radius: 8px;
             margin-top: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: none;
             position: relative;
+            border: 1px solid var(--separator);
+            transition: all 0.3s ease;
         }
 
-        /* Loader animation */
         .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
+            display: inline-block;
             width: 20px;
             height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
             margin-right: 10px;
+            position: relative;
+        }
+
+        .loader::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            border-color: var(--accent-color) transparent var(--accent-color) transparent;
+            animation: spin 1.2s linear infinite;
         }
 
         @keyframes spin {
@@ -105,66 +261,271 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Style for the "Done" state */
         #downloadMessage.done {
-            background-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
         }
 
-        /* Style to initially hide the iframe */
         #pdfIframe {
             display: none;
-            width: 80%;
-            height: 600px;
-            margin-top: 20px;
+            width: 100%;
+            height: 500px;
+            margin-top: 30px;
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        /* Import Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        #pdfIframe.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-hover));
+            color: var(--bg-gradient-1);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .download-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.5);
+        }
+
+        .download-button:hover::before {
+            left: 100%;
+        }
+
+        .skills {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .skills h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background-color: var(--sponsor-bg);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--separator);
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            background-color: var(--sponsor-hover);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header h2 {
+                font-size: 1.1rem;
+            }
+
+            .links {
+                gap: 15px;
+            }
+
+            .link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            #typingAnimation {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
     <div class="container">
+        <div class="header">
+            <h1>Marwen Labidi</h1>
+            <h2>Senior Front-end Developer</h2>
+        </div>
+
         <div id="typingAnimation"></div>
+
         <div class="links">
             <a href="https://marwenlabidi.github.io/Portfolio/" class="link" target="_blank">
-                🌐 Portfolio
+                <i class="fas fa-globe"></i>
+                <span>Portfolio</span>
             </a>
             <a href="https://www.linkedin.com/in/marwenlabidi/" class="link" target="_blank">
-                🔗 LinkedIn
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
             </a>
             <a href="https://github.com/MarwenLabidi" class="link" target="_blank">
-                🐙 GitHub
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
             </a>
             <a href="mailto:marwenlabidi.dev@gmail.com" class="link">
-                ✉️ Email
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
             </a>
             <a href="tel:+21623432113" class="link">
-                📞 Phone
+                <i class="fas fa-phone"></i>
+                <span>Phone</span>
             </a>
         </div>
-        <p id="downloadMessage" class="download-message">
-            <span class="loader"></span> Downloading resume...
-        </p>
-        <iframe id="pdfIframe" src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-marwen-labidi-resume.pdf" width="100%" height="600px"></iframe>
+
+        <div class="skills">
+            <h3>Skills</h3>
+            <div class="skill-tags">
+                <div class="skill-tag">React.js</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">TypeScript</div>
+                <div class="skill-tag">Next.js</div>
+                <div class="skill-tag">CSS3/SASS</div>
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">Redux</div>
+                <div class="skill-tag">UI Libraries</div>
+                <div class="skill-tag">Micro-Frontend</div>
+                <div class="skill-tag">PWA</div>
+                <div class="skill-tag">Agile/Scrum</div>
+                <div class="skill-tag">Team Leadership</div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <button id="downloadBtn" class="download-button">
+                <i class="fas fa-download"></i> Download Resume
+            </button>
+            <p id="downloadMessage">
+                <span class="loader"></span> Downloading resume...
+            </p>
+            <iframe id="pdfIframe" src="https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-marwen-labidi-resume.pdf" title="Marwen Labidi Resume"></iframe>
+        </div>
+
+        <footer>
+            &copy; 2025 Marwen Labidi - All Rights Reserved
+        </footer>
     </div>
 
     <script>
-        const text = `My name is Marwen Labidi, and I’m a Senior Front-end Developer with 5 years of experience specializing in React.js and modern JavaScript frameworks. I’ve worked on a variety of projects, including building UI libraries, micro front-end architectures, and optimizing performance using PWA and caching techniques. I’m passionate about creating scalable, user-friendly applications and have experience leading small teams in Agile environments. Outside of work, I enjoy staying updated with the latest front-end technologies and occasionally teaching React to aspiring developers.`;
-        const typingAnimation = document.getElementById('typingAnimation');
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
 
-        // Function to simulate typing effect
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random size between 3px and 8px
+            const size = Math.random() * 5 + 3;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation delay
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+
+        // Typing effect
+        const text = `My name is Marwen Labidi, and I'm a Senior Front-end Developer with 5 years of experience specializing in React.js and modern JavaScript frameworks. I've worked on a variety of projects, including building UI libraries, micro front-end architectures, and optimizing performance using PWA and caching techniques. I'm passionate about creating scalable, user-friendly applications and have experience leading small teams in Agile environments. Outside of work, I enjoy staying updated with the latest front-end technologies and occasionally teaching React to aspiring developers.`;
+        const typingAnimation = document.getElementById('typingAnimation');
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+
         function typeText() {
             let i = 0;
-            const speed = 30; // Adjust typing speed here
+            const speed = 30; // Typing speed
 
             function type() {
                 if (i < text.length) {
-                    typingAnimation.innerHTML += text.charAt(i);
+                    typingAnimation.textContent += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
+                } else {
+                    // Add cursor at the end
+                    typingAnimation.appendChild(cursor);
                 }
             }
 
@@ -172,25 +533,64 @@
         }
 
         // Start typing animation
-        typeText();
+        window.addEventListener('load', typeText);
 
-        // Show the download message immediately
+        // Resume download functionality
+        const downloadBtn = document.getElementById('downloadBtn');
         const downloadMessage = document.getElementById('downloadMessage');
-        downloadMessage.style.display = 'block';
+        const pdfIframe = document.getElementById('pdfIframe');
 
-        // Simulate the download process
-        setTimeout(function() {
-            // Change the message and color to "Done" and green
-            downloadMessage.innerHTML = 'Done!'; // Update the message
-            downloadMessage.classList.add('done'); // Change the background color to green
+        // PDF URL
+        const pdfUrl = 'https://raw.githubusercontent.com/MarwenLabidi/resume/main/senior-front-end-developer-marwen-labidi-resume.pdf';
+        
+        // Pre-load the PDF to check if it's accessible
+        fetch(pdfUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('PDF could not be loaded');
+                }
+                return response;
+            })
+            .catch(error => {
+                console.error('Error pre-loading PDF:', error);
+                // If there's an error, we'll handle it when the button is clicked
+            });
 
-            // Hide the loader
-            const loader = document.querySelector('.loader');
-            loader.style.display = 'none';
-
-            // Show the iframe after the download is complete
-            document.getElementById('pdfIframe').style.display = 'block';
-        }, 3000); // Simulate a 3-second download process
+        downloadBtn.addEventListener('click', function() {
+            // Show the download message
+            downloadMessage.style.display = 'block';
+            
+            // Direct download functionality
+            const a = document.createElement('a');
+            a.href = pdfUrl;
+            a.download = 'senior-front-end-developer-marwen-labidi-resume.pdf';
+            
+            // Try direct download first
+            a.click();
+            
+            // Update the message
+            setTimeout(function() {
+                downloadMessage.innerHTML = '<i class="fas fa-check-circle"></i> Download initiated!';
+                downloadMessage.classList.add('done');
+                
+                // Change button text and functionality to provide a backup option
+                downloadBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
+                downloadBtn.onclick = function() {
+                    window.open(pdfUrl, '_blank');
+                };
+            }, 1500);
+            
+            // Handle potential download errors
+            setTimeout(function() {
+                // Add a backup option in case the download didn't work
+                if (downloadMessage.classList.contains('done')) {
+                    downloadMessage.innerHTML += '<br><small>If download didn\'t start, click the button to open in browser</small>';
+                } else {
+                    downloadMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Download may have failed. Try opening in browser.';
+                    downloadMessage.classList.add('done');
+                }
+            }, 3000);
+        });
     </script>
 </body>
 </html>
